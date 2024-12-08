@@ -48,7 +48,7 @@ module.exports = {
     }
   },
   devServer: {
-    port: 3000, // Port for the development server
+    port: 8080, // Port for the development server
     open: false, // Open the default web browser when the server starts
     static: {
       directory: path.join(__dirname, "public"),

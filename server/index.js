@@ -47,7 +47,7 @@ app.get('/', (req, resp) => {
 
 })
 
-app.listen(8080, () => {
-    console.log('server listening on 8080')
+app.listen(3000, () => {
+    console.log('server listening on 3000')
 })
 

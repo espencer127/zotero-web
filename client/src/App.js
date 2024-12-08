@@ -5,7 +5,7 @@ const { getPosts } = require('./api-call.js');
 
 const apiCall = () => {
     console.log("gonna make a call");
-  fetch('http://localhost:8080')
+  fetch('http://localhost:3030')
   .then((response) => response.json())
   .then((data) => {
     //this console.log will be in our frontend console
