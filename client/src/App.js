@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+//import './App.html';
 import React, { useState, useEffect } from 'react';
-const { getPosts } = require('./api-call.js');
 
-const apiCall = () => {
+const apiBackendCall = () => {
     console.log("gonna make a call");
   fetch('http://localhost:3030')
   .then((response) => response.json())
@@ -20,7 +20,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-            <button onClick={apiCall}>Make API Call</button>
+            <button onClick={apiBackendCall}>Make API Call</button>
         </p>
         <a
           className="App-link"
