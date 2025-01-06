@@ -9,21 +9,20 @@ app.use(cors())
 var http = require('follow-redirects').http;
 var fs = require('fs');
 
-var options = {
-  'method': 'GET',
-  'hostname': 'localhost',
-  'port': 23119,
-  'path': '/api/users/0/collections',
-  'headers': {
-    'Content-Type': 'text/plain'
-  },
-  'maxRedirects': 20
-};
-
-
 
 app.get('/', (req, resp) => {
     console.log("got a request")
+
+    var options = {
+      'method': 'GET',
+      'hostname': 'localhost',
+      'port': 23119,
+      'path': '/api/users/0/collections',
+      'headers': {
+        'Content-Type': 'text/plain'
+      },
+      'maxRedirects': 20
+    };
 
     var body;
 
@@ -44,6 +43,43 @@ app.get('/', (req, resp) => {
         console.error(error);
       });
     }).end();
+
+})
+
+app.post('/collectionItems/:collectionKey', (req, resp) => {
+  console.log("got a request to retrieve collection items")
+
+  var options = {
+    'method': 'GET',
+    'hostname': 'localhost',
+    'port': 23119,
+    'path': '/api/users/0/collections/'+ req.params.collectionKey + '/items',
+    'headers': {
+      'Content-Type': 'text/plain'
+    },
+    'maxRedirects': 20
+  };
+
+  var body;
+
+  var zoteroreq = http.request(options, function (res) {
+    var chunks = [];
+
+    res.on("data", function (chunk) {
+      chunks.push(chunk);
+    });
+
+    res.on("end", function (chunk) {
+      body = Buffer.concat(chunks);
+      console.log("API call had the path of " + options.path);
+      //console.log("API call response for collection items: " + body.toString());
+      resp.send(body.toString());
+    });
+
+    res.on("error", function (error) {
+      console.error(error);
+    });
+  }).end();
 
 })
 
